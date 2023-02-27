@@ -2,6 +2,7 @@ import express from 'express';
 // для считывания с файла переменных окружения
 import dotenv from 'dotenv';
 import sequelize from './db.js';
+// создаются таблицы
 import models from './models/models.js';
 // для отправки запросов с браузера
 import cors from 'cors';
