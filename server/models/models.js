@@ -58,6 +58,7 @@ const DeviceInfo = sequelize.define('device_info', {
   description: { type: DataTypes.STRING, allowNull: false },
 });
 
+// связующая таблица между типом и брендом
 const TypeBrand = sequelize.define('type_brand', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 });
