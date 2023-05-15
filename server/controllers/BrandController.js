@@ -1,6 +1,6 @@
 class BrandController {
-  async getAll(res, req) {}
-  async create(res, req) {}
+  async getAll(req, res) {}
+  async create(req, res) {}
 }
 
 export default new BrandController();

@@ -1,7 +1,7 @@
 class DeviceController {
-  async getAll(res, req) {}
-  async getOne(res, req) {}
-  async create(res, req) {}
+  async getAll(req, res) {}
+  async getOne(req, res) {}
+  async create(req, res) {}
 }
 
 export default new DeviceController();

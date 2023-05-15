@@ -17,11 +17,13 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(cors());
-app.use(express.json());
-app.use('/api', router)
+app.use(express.json()); 
+app.use('/api', router);
 // миддл варе, который работает с ошибками, всегда должен регистрироваться в конце
 // обработка ошибок. Он последний в цепочке, поэтому мы не вызвали в нем ф-цию next
-app.use(errorHandler)
+// если нет id, то будет ответ от серера в виде ошибки серввера в HTML, а миддлеваре обрабаоывает его и делает на выходе json, 
+// который мы потом можем обработать на странице, так же сохраняет код ошибки, сгенерированный сервером
+app.use(errorHandler);
 
 // app.get('/', (req, res) => {
 //   res.status(200).json({ message: 'все ок' });
