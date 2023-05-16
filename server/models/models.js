@@ -93,21 +93,15 @@ Device.belongsTo(Brand);
 Device.hasMany(BasketDevice);
 BasketDevice.belongsTo(Device);
 
+// info - название поля, которое будет у массива характеристик
+Device.hasMany(DeviceInfo, { as: 'info' });
+DeviceInfo.belongsTo(Device);
+
 // связь многие ко многим
 // необходимо указать связующую таблицу - связующую модель
 Type.belongsToMany(Brand, { through: TypeBrand });
 Brand.belongsToMany(Type, { through: TypeBrand });
 
-export {
-  User,
-  Basket,
-  BasketDevice,
-  Brand,
-  Device,
-  DeviceInfo,
-  Rating,
-  Type,
-  TypeBrand,
-};
+export { User, Basket, BasketDevice, Brand, Device, DeviceInfo, Rating, Type, TypeBrand };
 
 export default User;

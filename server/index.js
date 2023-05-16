@@ -2,22 +2,30 @@
 import express from 'express';
 // для считывания с файла переменных окружения
 import dotenv from 'dotenv';
+// ORM
 import sequelize from './db.js';
 // создаются таблицы
 import models from './models/models.js';
 // для отправки fetch запросов с браузера
 import cors from 'cors';
+// для загрузки файлов
+import fileUpload from 'express-fileupload'
 import router from './routes/index.js';
 import { errorHandler } from './middleware/ErrorHandlingMiddleware.js';
-
+import path from 'path';
 
 const env = dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 
+const __dirname = path.resolve();
+
 const app = express();
 app.use(cors());
 app.use(express.json()); 
+// файлы из папки static необходимо раздавать как статику
+app.use(express.static(path.resolve(__dirname, 'static')))
+app.use(fileUpload({}));
 app.use('/api', router);
 // миддл варе, который работает с ошибками, всегда должен регистрироваться в конце
 // обработка ошибок. Он последний в цепочке, поэтому мы не вызвали в нем ф-цию next
