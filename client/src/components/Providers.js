@@ -7,7 +7,7 @@ export const Context = createContext(null);
 
 const Providers = ({ children }) => {
   return (
-    <Context.Provider value={{ user: new UserStore(), devices: new DeviceStore() }}>
+    <Context.Provider value={{ user: new UserStore(), device: new DeviceStore() }}>
       <BrowserRouter>{children}</BrowserRouter>
     </Context.Provider>
   );
