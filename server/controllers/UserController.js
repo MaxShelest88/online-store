@@ -22,7 +22,7 @@ const generateJwt = (id, email, role) => {
 // TODO посмотреть видео про jwt авторизацию
 
 class UserController {
-  async registration(req, res) {
+  async registration(req, res, next) {
     const { email, password, role } = req.body;
     if (!email || !password) {
       return next(ApiError.badRequest('Неккоректный email или password'));
@@ -54,7 +54,7 @@ class UserController {
     return res.json({ token });
   }
   // функция middleware
-  async check(req, res, next) {
+  async check(req, res) {
     //  //   получаем параметры строки запроса через req.query
     //  const { id } = req.query;
     //  if (!id) {

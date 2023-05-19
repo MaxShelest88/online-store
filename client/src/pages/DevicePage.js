@@ -5,8 +5,18 @@ import bigStar from '../assets/bigStar.png';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { fetchOneDevice } from '../http/deviceAPI';
 
 const DevicePage = () => {
+  const [device, setDevice] = useState({ info: [] });
+  const { id } = useParams();
+
+  useEffect(() => {
+    fetchOneDevice(id).then((data) => setDevice(data));
+  }, []);
+
   return (
     <Container className="mt-3">
       <Row>
@@ -14,14 +24,14 @@ const DevicePage = () => {
           <Image
             width={300}
             height={300}
-            src=""
+            src={process.env.REACT_APP_API_URL + device.img}
           />
         </Col>
         <Col md={4}>
-          <div>
-            <h2>имя</h2>
+          <div className="d-flex  flex-column justify-content-center align-items-center">
+            <h2>{device.name}</h2>
             <div
-              className="d-flex justify-content-between align-items-center"
+              className="d-flex justify-content-center align-items-center"
               style={{
                 background: `url(${bigStar}) no-repeat center center`,
                 width: 240,
@@ -30,7 +40,7 @@ const DevicePage = () => {
                 fontSize: 64,
               }}
             >
-              рейтинг
+              <p>{device.rating}</p>
             </div>
           </div>
         </Col>
@@ -39,13 +49,22 @@ const DevicePage = () => {
             className="d-flex flex-column justify-content-around align-items-center"
             style={{ width: 300, height: 300, fontSize: 32, border: '5px solid lightgrey' }}
           >
-            <h3>цена руб.</h3> <Button variant={'outline-dark'}>Добавить в корзину</Button>
+            <h3>{device.price} руб.</h3>{' '}
+            <Button variant={'outline-dark'}>Добавить в корзину</Button>
           </Card>
         </Col>
-		  </Row>
-		  <Row>
-			  <h2>Характеристики</h2>
-		  </Row>
+      </Row>
+      <Row>
+        <h2>Характеристики</h2>
+        {device.info.map((info, index) => (
+          <Row
+            key={info.index}
+            style={{ background: index % 2 === 0 ? 'lightgrey' : 'transparent', padding: 10 }}
+          >
+            {info.title}: {info.description}
+          </Row>
+        ))}
+      </Row>
     </Container>
   );
 };

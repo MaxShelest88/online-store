@@ -1,4 +1,5 @@
 // проверяем роль пользователя
+import jwt from 'jsonwebtoken';
 
 export default function (role) {
   return function (req, res, next) {

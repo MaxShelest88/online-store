@@ -6,11 +6,37 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../utils/consts';
+import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/consts';
+import { login, registration } from '../http/userAPI';
+import { useContext, useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import { Context } from '../components/Providers';
+import { useNavigate } from 'react-router-dom';
 
-const Auth = () => {
+const Auth = observer(() => {
+  const navigate = useNavigate();
+  const { user } = useContext(Context);
   let location = useLocation();
   const isLogin = location.pathname === LOGIN_ROUTE;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const click = async () => {
+    try {
+      let userData;
+      if (isLogin) {
+        userData = await login(email, password);
+      } else {
+        userData = await registration(email, password);
+      }
+      user.setUser(user);
+      user.setIsAuth(true);
+      navigate(SHOP_ROUTE);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+
   return (
     <Container
       className="d-flex justify-content-center align-items-center"
@@ -25,10 +51,15 @@ const Auth = () => {
           <Form.Control
             className="mt-3"
             placeholder="Введите email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <Form.Control
             className="mt-3"
             placeholder="Ведите Пароль"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
           />
           <Row>
             <Col>
@@ -46,6 +77,7 @@ const Auth = () => {
               <Button
                 variant={'outline-success'}
                 className="align-self-end"
+                onClick={click}
               >
                 {isLogin ? 'Войти' : 'Зарегистрироваться'}
               </Button>
@@ -55,5 +87,6 @@ const Auth = () => {
       </Card>
     </Container>
   );
-};
+});
+
 export default Auth;

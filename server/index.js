@@ -11,10 +11,9 @@ import cors from 'cors';
 // для загрузки файлов
 import fileUpload from 'express-fileupload'
 import router from './routes/index.js';
-import { errorHandler } from './middleware/ErrorHandlingMiddleware.js';
-import path from 'path';
+import errorHandler from './middleware/ErrorHandlingMiddleware.js'
 
-const env = dotenv.config();
+import path from 'path';
 
 const PORT = process.env.PORT || 5000;
 
