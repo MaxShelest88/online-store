@@ -5,6 +5,7 @@ import * as path from 'path';
 import { Device, DeviceInfo } from '../models/models.js';
 import ApiError from '../error/ApiError.js';
 import { fileURLToPath } from 'url';
+import { log } from 'console';
 
 //  изза того, что модули используются, __dirname не доступен глобально, и необходимо делать такой финт
 const __filename = fileURLToPath(import.meta.url);
@@ -43,8 +44,9 @@ class DeviceController {
     return res.json(device);
   }
   async create(req, res, next) {
-    try {
-      const { name, price, brandId, typeId, info } = req.body;
+	  try {
+		console.log(req.body);
+      let { name, price, brandId, typeId, info } = req.body;
       const { img } = req.files;
 
       //   генерируем название файла
