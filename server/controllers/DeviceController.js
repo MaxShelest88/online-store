@@ -45,7 +45,6 @@ class DeviceController {
   }
   async create(req, res, next) {
 	  try {
-		console.log(req.body);
       let { name, price, brandId, typeId, info } = req.body;
       const { img } = req.files;
 
