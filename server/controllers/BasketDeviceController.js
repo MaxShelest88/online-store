@@ -1,24 +1,19 @@
-import { BasketDevice, Basket } from '../models/models.js';
+import { BasketDevice, Basket, Device } from '../models/models.js';
 import ApiError from '../error/ApiError.js';
 
 class BasketDeviceController {
-  async getAll(req, res) {
-    const basketDevices = await BasketDevice.findAll();
-    return res.json(basketDevices);
+  async getAll(req, res, next) {
+    const { id } = req.params;
+    const userBasket = await Basket.findOne({ where: { userId: id } });
+    if (userBasket) {
+      const devices = await Device.findAll({
+        include: { model: BasketDevice, where: { basketId: userBasket.id } },
+      });
+      return res.json(devices);
+    } else {
+      return next(ApiError.badRequest('Пользователь не найден'));
+    }
   }
-
-//   async create(req, res) {
-//     const { id } = req.params;
-//     const userBasket = await Basket.findOne({ where: { userId } });
-//     const basketDevice = await BasketDevice.create({ id, basketId: userBasket.id });
-//     return res.json(basketDevice);
-//   }
-
-  //   async create(req, res) {
-  //     const { id } = req.body;
-  //     const type = await Type.create({ name });
-  //     return res.json(type);
-  //   }
 }
 
 export default new BasketDeviceController();

@@ -5,7 +5,7 @@ export const addDeviceToBasket = async (id, userId) => {
   return data;
 };
 
-export const fetchBasketDevices = async () => {
-  const { data } = await $authHost.get('api/basket');
+export const fetchBasketDevices = async (userId) => {
+  const { data } = await $authHost.get('api/basket/' + userId);
   return data;
 };

@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = observer(() => {
   const navigate = useNavigate();
-  const { user } = useContext(Context);
+	const { user } = useContext(Context);
 
   const logOut = () => {
     user.setUser({});
@@ -46,7 +46,7 @@ const Header = observer(() => {
             </Button>
             <Button
               variant={'outline-light'}
-              onClick={() => navigate(BASKET_ROUTE)}
+              onClick={() => navigate(BASKET_ROUTE + '/' + user.user.id)}
             >
               Корзина
             </Button>
