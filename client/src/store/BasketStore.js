@@ -8,6 +8,9 @@ export default class BasketStore {
   setDevices(devices) {
     this._devices = devices;
   }
+  clearDevices() {
+    this._devices = [];
+  }
   get devices() {
     return this._devices;
   }

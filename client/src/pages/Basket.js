@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { Context } from '../components/Providers';
 import { fetchBasketDevices } from '../http/basketApi';
 import { observer } from 'mobx-react-lite';

@@ -13,11 +13,13 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = observer(() => {
   const navigate = useNavigate();
-	const { user } = useContext(Context);
+  const { user } = useContext(Context);
+  const { basket } = useContext(Context);
 
   const logOut = () => {
     user.setUser({});
     user.setIsAuth(false);
+    basket.clearDevices();
     localStorage.removeItem('token');
     navigate(LOGIN_ROUTE);
   };
