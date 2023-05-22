@@ -5,12 +5,15 @@ import bigStar from '../assets/bigStar.png';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchOneDevice } from '../http/deviceAPI';
+import { addDeviceToBasket } from '../http/basketApi';
+import { Context } from '../components/Providers';
 
 const DevicePage = () => {
   const [device, setDevice] = useState({ info: [] });
+  const { user } = useContext(Context);
   const { id } = useParams();
 
   useEffect(() => {
@@ -50,7 +53,12 @@ const DevicePage = () => {
             style={{ width: 300, height: 300, fontSize: 32, border: '5px solid lightgrey' }}
           >
             <h3>{device.price} руб.</h3>{' '}
-            <Button variant={'outline-dark'}>Добавить в корзину</Button>
+            <Button
+              variant={'outline-dark'}
+              onClick={() => addDeviceToBasket(id, user.user.id)}
+            >
+              Добавить в корзину
+            </Button>
           </Card>
         </Col>
       </Row>

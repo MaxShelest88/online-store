@@ -2,11 +2,10 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
 import star from '../assets/star.png';
-import { useNavigate } from 'react-router-dom';
-import { DEVICE_ROUTE } from '../utils/consts';
 
-const DeviceItem = ({ device }) => {
-  const navigate = useNavigate();
+
+const BasketDeviceItem = ({ device }) => {
+
   return (
     <Col
       md={3}
@@ -15,7 +14,6 @@ const DeviceItem = ({ device }) => {
       <Card
         style={{ width: 150, cursor: 'pointer' }}
         border={'light'}
-        onClick={() => navigate(DEVICE_ROUTE + '/' + device.id)}
       >
         <Image
           width={150}
@@ -38,4 +36,4 @@ const DeviceItem = ({ device }) => {
     </Col>
   );
 };
-export default DeviceItem;
+export default BasketDeviceItem;

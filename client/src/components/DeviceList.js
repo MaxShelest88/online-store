@@ -5,7 +5,9 @@ import Row from 'react-bootstrap/Row';
 import DeviceItem from './DeviceItem';
 
 const DeviceList = observer(() => {
-  const { device } = useContext(Context);
+	const { device } = useContext(Context);
+	
+	console.log(device.devices);
   return (
     <Row>
       {device.devices.map((device) => (

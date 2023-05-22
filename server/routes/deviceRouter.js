@@ -8,6 +8,7 @@ const router = new Router();
 router.post('/', checkRole('ADMIN'), DeviceController.create);
 router.get('/', DeviceController.getAll);
 router.get('/:id', DeviceController.getOne);
+router.post('/:id', DeviceController.createBasketDevice);
 //to do delete
 
 export default router;

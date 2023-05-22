@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
-import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/consts';
+import { ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/consts';
 import Button from 'react-bootstrap/Button';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
@@ -43,6 +43,12 @@ const Header = observer(() => {
               onClick={() => navigate(ADMIN_ROUTE)}
             >
               Админ панель
+            </Button>
+            <Button
+              variant={'outline-light'}
+              onClick={() => navigate(BASKET_ROUTE)}
+            >
+              Корзина
             </Button>
             <Button
               variant={'outline-light'}

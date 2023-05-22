@@ -2,7 +2,7 @@
 import * as uuid from 'uuid';
 // для указания поути размещения файла
 import * as path from 'path';
-import { Device, DeviceInfo } from '../models/models.js';
+import { Device, DeviceInfo, BasketDevice, Basket } from '../models/models.js';
 import ApiError from '../error/ApiError.js';
 import { fileURLToPath } from 'url';
 import { log } from 'console';
@@ -44,7 +44,7 @@ class DeviceController {
     return res.json(device);
   }
   async create(req, res, next) {
-	  try {
+    try {
       let { name, price, brandId, typeId, info } = req.body;
       const { img } = req.files;
 
@@ -76,6 +76,12 @@ class DeviceController {
       //  если какая-то ошибка
       next(ApiError.badRequest(error.message));
     }
+  }
+  async createBasketDevice(req, res, next) {
+    const { id, userId } = req.body;
+	  const userBasket = await Basket.findOne({ where: { userId } });
+    const deviceBasket = await BasketDevice.create({ deviceId: id, basketId: userBasket.id });
+    return res.json(deviceBasket);
   }
 }
 
