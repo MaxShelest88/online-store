@@ -7,18 +7,26 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchOneDevice } from '../http/deviceAPI';
+import { fetchOneDevice, setRange } from '../http/deviceAPI';
 import { addDeviceToBasket } from '../http/basketApi';
 import { Context } from '../components/Providers';
+import Range from '../components/Range';
+import Form from 'react-bootstrap/Form';
+import { observer } from 'mobx-react-lite';
 
-const DevicePage = () => {
+const DevicePage = observer(() => {
   const [device, setDevice] = useState({ info: [] });
+  const [rate, setRate] = useState(0);
   const { user } = useContext(Context);
   const { id } = useParams();
 
   useEffect(() => {
     fetchOneDevice(id).then((data) => setDevice(data));
   }, []);
+
+  const onClick = () => {
+    setRange(user.user.id, id, rate);
+  };
 
   return (
     <Container className="mt-3">
@@ -60,6 +68,17 @@ const DevicePage = () => {
               Добавить в корзину
             </Button>
           </Card>
+          <div>
+            <Form.Label>Оценить</Form.Label>
+            <Form.Range
+              value={rate}
+              onChange={(e) => setRate(e.target.value)}
+              min={0}
+              max={5}
+            />
+            <p>{rate}</p>
+            <Button onClick={onClick}> Оценить</Button>
+          </div>
         </Col>
       </Row>
       <Row>
@@ -75,5 +94,5 @@ const DevicePage = () => {
       </Row>
     </Container>
   );
-};
+});
 export default DevicePage;

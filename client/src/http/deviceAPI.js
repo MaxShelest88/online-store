@@ -34,4 +34,7 @@ export const fetchOneDevice = async (id) => {
   return data;
 };
 
-
+export const setRange = async (userId, deviceId, rate) => {
+  const { data } = await $authHost.put('api/device/' + deviceId, { userId, deviceId, rate });
+  return data;
+};

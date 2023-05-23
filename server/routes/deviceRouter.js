@@ -9,6 +9,7 @@ router.post('/', checkRole('ADMIN'), DeviceController.create);
 router.get('/', DeviceController.getAll);
 router.get('/:id', DeviceController.getOne);
 router.post('/:id', DeviceController.createBasketDevice);
+router.put('/:id', DeviceController.rate);
 //to do delete
 
 export default router;

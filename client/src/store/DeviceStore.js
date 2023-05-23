@@ -38,6 +38,14 @@ export default class DeviceStore {
   setLimit(limit) {
     this._limit = limit;
   }
+  clearSelectedBrand() {
+    this.setPage(1);
+    this._selectedBrand = {};
+  }
+  clearSelectedType() {
+    this.setPage(1);
+    this._selectedType = {};
+  }
   //   computed функции
   // вызываюстя в том случае, когда переменная, которая используется внутри была изменена
   get types() {
