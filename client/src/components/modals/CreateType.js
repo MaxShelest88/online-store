@@ -8,10 +8,12 @@ const CreateType = ({ show, onHide }) => {
   const [value, setValue] = useState('');
 
   const addType = () => {
-    createType({ name: value }).then((data) => {
-      setValue('');
-      onHide();
-    });
+    createType({ name: value })
+      .then((data) => {
+        setValue('');
+        onHide();
+      })
+      .catch((error) => alert(error.response.data.message));
   };
   return (
     <Modal

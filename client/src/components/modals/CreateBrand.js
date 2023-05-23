@@ -7,10 +7,12 @@ import { createBrand } from '../../http/deviceAPI';
 const CreateBrand = ({ show, onHide }) => {
   const [value, setValue] = useState('');
   const addBrand = () => {
-    createBrand({ name: value }).then((data) => {
-      setValue('');
-      onHide();
-    });
+    createBrand({ name: value })
+      .then((data) => {
+        setValue('');
+        onHide();
+      })
+      .catch((error) => alert(error.response.data.message));
   };
   return (
     <Modal

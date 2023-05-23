@@ -46,16 +46,17 @@ const Header = observer(() => {
             >
               Админ панель
             </Button>
+
             <Button
               variant={'outline-light'}
               onClick={() => navigate(BASKET_ROUTE + '/' + user.user.id)}
             >
               Корзина
             </Button>
+            <div className="ms-4">{user.user.email}</div>
             <Button
               variant={'outline-light'}
               onClick={() => logOut()}
-              className="ms-4"
             >
               Выйти
             </Button>
