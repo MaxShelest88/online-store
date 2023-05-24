@@ -9,6 +9,7 @@ import { useContext, useEffect } from 'react';
 import { Context } from '../components/Providers';
 import { fetchBrands, fetchDevices, fetchTypes } from '../http/deviceAPI';
 import Pages from '../components/Pages';
+import Button from 'react-bootstrap/Button';
 
 const Shop = observer(() => {
   const { device } = useContext(Context);
@@ -29,11 +30,17 @@ const Shop = observer(() => {
     });
   }, [device, device.page, device.selectedType, device.selectedBrand]);
 
+  const onClick = () => {
+    device.clearSelectedType();
+    device.clearSelectedBrand();
+  };
+
   return (
     <Container>
       <Row className="mt-2">
         <Col md={3}>
           <TypeBar />
+          <Button onClick={onClick}>Очистить фильтры</Button>
         </Col>
         <Col md={9}>
           <BrandBar />

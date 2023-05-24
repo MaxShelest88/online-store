@@ -2,15 +2,9 @@ import { observer } from 'mobx-react-lite';
 import { useContext } from 'react';
 import { Context } from './Providers';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
 
 const TypeBar = observer(() => {
   const { device } = useContext(Context);
-
-  const onClick = () => {
-    device.clearSelectedType();
-    device.clearSelectedBrand();
-  };
 
   return (
     <div>
@@ -26,7 +20,7 @@ const TypeBar = observer(() => {
           </ListGroup.Item>
         ))}
       </ListGroup>
-      <Button onClick={onClick}>Очистить фильтры</Button>
+      
     </div>
   );
 });
